@@ -7,11 +7,11 @@ El archivo _crypto-config.yaml_ es crucial para definir la estructura y configur
 - __OrdererOrgs__: Define las organizaciones que actúan como nodos orderer. Se especifican el nombre de la organización, el dominio y se activan las Organizational Units (OU) para los nodos.
 - __PeerOrgs__: Define las organizaciones que actúan como pares. En este ejemplo, hay dos organizaciones, Org1 y Org2, cada una con un nodo de par. Se definen el nombre de la organización, el dominio, se activan las Organizational Units (OU) para los nodos y se define el número de nodos de par junto con el número de usuarios asociados a la organización.
 
-Para generar los materiales criptográficos definidos en el archivo _crypto-config.yaml_, utilizamos la herramienta cryptogen.
+Para generar los materiales criptográficos definidos en el archivo _crypto-config.yaml_, utilizamos la herramienta _cryptogen_.
 
 _cryptogen generate --config=./crypto-config.yaml_
 
-La variable de entorno FABRIC_CFG_PATH se utiliza para especificar la ruta donde se encuentran los archivos de configuración de Fabric, como configtx.yaml y otros archivos YAML necesarios para configurar y desplegar la red.
+La variable de entorno _FABRIC_CFG_PATH_ se utiliza para especificar la ruta donde se encuentran los archivos de configuración de Fabric, como _configtx.yaml_ y otros archivos YAML necesarios para configurar y desplegar la red.
 
 _export FABRIC_CFG_PATH=/home/ubuntu/fabric-samples/red-propia_
 
@@ -47,7 +47,7 @@ De esta manera vamos a tener los siguientes elementos en la red:
 - channel.tx: Es el archivo de transacción utilizado para crear un nuevo canal en la red.
 - Org1MSPanchors.tx y Org2MSPanchors.tx: Son archivos de transacción que actualizan los peers de anclaje de las organizaciones Org1 y Org2 respectivamente.
 
-El siguiente paso es definir y configurar los archivos docker-compose.yaml. Estos archivos describen cómo se deben levantar los contenedores Docker para los nodos de la red. En este ejemplo, utilizamos dos archivos docker-compose para dos máquinas virtuales (MV):
+El siguiente paso es definir y configurar los archivos _docker-compose.yaml_. Estos archivos describen cómo se deben levantar los contenedores Docker para los nodos de la red. En este ejemplo, utilizamos dos archivos _docker-compose_ para dos máquinas virtuales (MV):
 - docker-compose-org1.yaml en la MV1, que levanta el contenedor para el orderer y el peer de la organización Org1. Se define la versión, los volumes persistentes para los contenedores orderer y peer de Org1, la red en la que se comunican los contenedores y los servicios a desplegar:
   - orderer.example.com: nombre del contenedor, imagen de Docker a utilizar (hyperledger/fabric-orderer:latest), environment (Variables de entorno necesarias para la configuración del orderer), volumes (Montaje de volúmenes para compartir archivos necesarios, como el bloque génesis y la MSP) y networks (Red en la que se comunica el contenedor).
   - peer0.org1.example.com: Similar configuración para el peer de Org1, especificando la imagen de Docker, variables de entorno, volúmenes y red.
@@ -57,8 +57,8 @@ El siguiente paso es definir y configurar los archivos docker-compose.yaml. Esto
 
 En cada máquina virtual, se ejecutan los siguientes comandos para levantar los contenedores:
 
-En la MV1: _docker-compose -f docker-compose-org1.yaml up -d_
-En la MV2: _docker-compose -f docker-compose-org2.yaml up –d_
+En la MV1: _docker-compose -f docker-compose-org1.yaml up -d_.
+En la MV2: _docker-compose -f docker-compose-org2.yaml up –d_.
 
 Esto iniciará los contenedores definidos en cada archivo docker-compose, configurando así la red de Hyperledger Fabric con un orderer y dos organizaciones en diferentes máquinas virtuales.
 Un canal es una subred de la red blockchain donde se pueden realizar transacciones específicas entre los miembros del canal. Aquí, detallaremos los pasos y comandos necesarios para que Org1 se una al canal llamado mychannel.
