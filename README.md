@@ -7,10 +7,12 @@ El archivo _crypto-config.yaml_ es crucial para definir la estructura y configur
 - __OrdererOrgs__: Define las organizaciones que actúan como nodos orderer. Se especifican el nombre de la organización, el dominio y se activan las Organizational Units (OU) para los nodos.
 - __PeerOrgs__: Define las organizaciones que actúan como pares. En este ejemplo, hay dos organizaciones, Org1 y Org2, cada una con un nodo de par. Se definen el nombre de la organización, el dominio, se activan las Organizational Units (OU) para los nodos y se define el número de nodos de par junto con el número de usuarios asociados a la organización.
 
-Para generar los materiales criptográficos definidos en el archivo crypto-config.yaml, utilizamos la herramienta cryptogen
-cryptogen generate --config=./crypto-config.yaml
+Para generar los materiales criptográficos definidos en el archivo _crypto-config.yaml_, utilizamos la herramienta cryptogen.
+
+_cryptogen generate --config=./crypto-config.yaml_
 
 La variable de entorno FABRIC_CFG_PATH se utiliza para especificar la ruta donde se encuentran los archivos de configuración de Fabric, como configtx.yaml y otros archivos YAML necesarios para configurar y desplegar la red.
+
 _export FABRIC_CFG_PATH=/home/ubuntu/fabric-samples/red-propia_
 
 Para configurar y desplegar una red de Hyperledger Fabric, el archivo configtx.yaml es fundamental. Este archivo define la configuración del canal, las organizaciones participantes y las políticas de consenso. Aquí se explicará la estructura y contenido del archivo configtx.yaml que se utiliza para la configuración de la red.
