@@ -61,6 +61,7 @@ En la MV1: _docker-compose -f docker-compose-org1.yaml up -d_.
 En la MV2: _docker-compose -f docker-compose-org2.yaml up –d_.
 
 Esto iniciará los contenedores definidos en cada archivo docker-compose, configurando así la red de Hyperledger Fabric con un orderer y dos organizaciones en diferentes máquinas virtuales.
+
 Un canal es una subred de la red blockchain donde se pueden realizar transacciones específicas entre los miembros del canal. Aquí, detallaremos los pasos y comandos necesarios para que Org1 se una al canal llamado mychannel.
 
 # Configuración del Entorno para Org1
