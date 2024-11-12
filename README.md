@@ -77,7 +77,7 @@ _export CORE_PEER_LOCALMSPID=Org1MSP_
 
 Especifica el camino al directorio MSP que contiene los certificados y las claves de la identidad administrativa de Org1.
 
-_export CORE_PEER_MSPCONFIGPATH=/home/ubuntu/fabric-samples/red-propia/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp_
+_export CORE_PEER_MSPCONFIGPATH=/home/ubuntu/fabric-samples/org1.example.com/users/Admin@org1.example.com/msp_
 
 Define la dirección del peer peer0 de Org1.
 
@@ -87,8 +87,8 @@ El siguiente comando crea un canal llamado mychannel. Este canal será administr
 
 _peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/channel.tx --outputBlock ./channel-artifacts/mychannel.block_
 
--  -f ./channel-artifacts/channel.tx: Archivo de configuración del canal que especifica los parámetros y las políticas del canal.
--  --outputBlock ./channel-artifacts/mychannel.block: Archivo de salida donde se guarda el bloque génesis del canal.
+-  _-f ./channel-artifacts/channel.tx_: Archivo de configuración del canal que especifica los parámetros y las políticas del canal.
+-  _--outputBlock ./channel-artifacts/mychannel.block_: Archivo de salida donde se guarda el bloque génesis del canal.
   
 Una vez que el canal ha sido creado, el peer de Org1 se une al canal utilizando el bloque génesis del canal (mychannel.block).
 
@@ -100,12 +100,13 @@ Para verificar que el peer se ha unido correctamente al canal, se puede listar l
 
 Para que el peer de Org2 (que reside en la MV2) pueda unirse al canal mychannel, es necesario copiar el bloque de creación del canal (mychannel.block) desde la MV1 a la MV2. Una vez copiado, se pueden configurar las variables de entorno para Org2 y ejecutar los comandos necesarios para unirse al canal.
 
-_export CORE_PEER_TLS_ENABLED=false_
-_export CORE_PEER_LOCALMSPID=Org2MSP_
-_export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/red-propia/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp_
-_export CORE_PEER_ADDRESS=peer0.org2.example.com:8051_
+_export CORE_PEER_TLS_ENABLED=false_.  
+_export CORE_PEER_LOCALMSPID=Org2MSP_.  
+_export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/red-propia/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp_.  
+_export CORE_PEER_ADDRESS=peer0.org2.example.com:8051_.  
 
-Con las variables de entorno configuradas, el peer de Org2 puede unirse al canal utilizando el bloque génesis copiado: _peer channel join -b ./channel-artifacts/mychannel.block_
+Con las variables de entorno configuradas, el peer de Org2 puede unirse al canal utilizando el bloque génesis copiado: _peer channel join -b ./channel-artifacts/mychannel.block_.
+
 Este proceso asegura que ambos peers, peer0.org1.example.com en la MV1 y peer0.org2.example.com en la MV2, estén unidos al canal mychannel, permitiendo que ambas organizaciones participen en la red blockchain y realicen transacciones en el canal compartido.
 
 # Desplegar un Chaincode en Hyperledger Fabric
