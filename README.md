@@ -2,13 +2,16 @@
 
 Para desplegar una red de Hyperledger Fabric, debemos configurar y generar varios archivos esenciales y seguir una serie de comandos específicos. En este ejemplo, se va a desplegar una red con dos máquinas virtuales, donde se desplegará un orderer y dos organizaciones. El orderer y la organización 1 (Org1) estarán en la máquina virtual 1 (MV1); la organización 2 (Org2) estará en la máquina virtual 2 (MV2).
 
-El archivo crypto-config.yaml es crucial para definir la estructura y configuración de la red blockchain. Este archivo especifica las organizaciones participantes, sus dominios, los nodos de tipo orderer y los pares (peers). También define la generación de materiales criptográficos (certificados y llaves) necesarios para la autenticación y comunicación segura entre los nodos de la red.
-•	OrdererOrgs: Define las organizaciones que actúan como nodos orderer. Se especifican el nombre de la organización, el dominio y se activan las Organizational Units (OU) para los nodos.
-•	PeerOrgs: Define las organizaciones que actúan como pares. En este ejemplo, hay dos organizaciones, Org1 y Org2, cada una con un nodo de par. Se definen el nombre de la organización, el dominio, se activan las Organizational Units (OU) para los nodos y se define el número de nodos de par junto con el número de usuarios asociados a la organización.
+El archivo _crypto-config.yaml_ es crucial para definir la estructura y configuración de la red blockchain. Este archivo especifica las organizaciones participantes, sus dominios, los nodos de tipo orderer y los pares (peers). También define la generación de materiales criptográficos (certificados y llaves) necesarios para la autenticación y comunicación segura entre los nodos de la red.
+
+- __OrdererOrgs__: Define las organizaciones que actúan como nodos orderer. Se especifican el nombre de la organización, el dominio y se activan las Organizational Units (OU) para los nodos.
+- __PeerOrgs__: Define las organizaciones que actúan como pares. En este ejemplo, hay dos organizaciones, Org1 y Org2, cada una con un nodo de par. Se definen el nombre de la organización, el dominio, se activan las Organizational Units (OU) para los nodos y se define el número de nodos de par junto con el número de usuarios asociados a la organización.
+
 Para generar los materiales criptográficos definidos en el archivo crypto-config.yaml, utilizamos la herramienta cryptogen
 cryptogen generate --config=./crypto-config.yaml
+
 La variable de entorno FABRIC_CFG_PATH se utiliza para especificar la ruta donde se encuentran los archivos de configuración de Fabric, como configtx.yaml y otros archivos YAML necesarios para configurar y desplegar la red.
-export FABRIC_CFG_PATH=/home/ubuntu/fabric-samples/red-propia
+_export FABRIC_CFG_PATH=/home/ubuntu/fabric-samples/red-propia_
 
 Para configurar y desplegar una red de Hyperledger Fabric, el archivo configtx.yaml es fundamental. Este archivo define la configuración del canal, las organizaciones participantes y las políticas de consenso. Aquí se explicará la estructura y contenido del archivo configtx.yaml que se utiliza para la configuración de la red.
 •	Organizations: Este apartado define las organizaciones participantes en la red, incluyendo tanto los nodos orderer como los nodos peer.
