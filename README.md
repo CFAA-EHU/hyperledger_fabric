@@ -86,35 +86,55 @@ El siguiente comando crea un canal llamado mychannel. Este canal será administr
 
 _peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/channel.tx --outputBlock ./channel-artifacts/mychannel.block_
 
-•  -f ./channel-artifacts/channel.tx: Archivo de configuración del canal que especifica los parámetros y las políticas del canal.
-•  --outputBlock ./channel-artifacts/mychannel.block: Archivo de salida donde se guarda el bloque génesis del canal.
+-  -f ./channel-artifacts/channel.tx: Archivo de configuración del canal que especifica los parámetros y las políticas del canal.
+-  --outputBlock ./channel-artifacts/mychannel.block: Archivo de salida donde se guarda el bloque génesis del canal.
+  
 Una vez que el canal ha sido creado, el peer de Org1 se une al canal utilizando el bloque génesis del canal (mychannel.block).
-peer channel join -b ./channel-artifacts/mychannel.block
-Para verificar que el peer se ha unido correctamente al canal, se puede listar los canales a los que el peer está unido: peer channel list
-Configuración del Entorno para Org2
+
+_peer channel join -b ./channel-artifacts/mychannel.block_
+
+Para verificar que el peer se ha unido correctamente al canal, se puede listar los canales a los que el peer está unido: _peer channel list_.
+
+# Configuración del Entorno para Org2
+
 Para que el peer de Org2 (que reside en la MV2) pueda unirse al canal mychannel, es necesario copiar el bloque de creación del canal (mychannel.block) desde la MV1 a la MV2. Una vez copiado, se pueden configurar las variables de entorno para Org2 y ejecutar los comandos necesarios para unirse al canal.
-export CORE_PEER_TLS_ENABLED=false
-export CORE_PEER_LOCALMSPID=Org2MSP
-export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/red-propia/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
-export CORE_PEER_ADDRESS=peer0.org2.example.com:8051
-Con las variables de entorno configuradas, el peer de Org2 puede unirse al canal utilizando el bloque génesis copiado: peer channel join -b ./channel-artifacts/mychannel.block
+
+_export CORE_PEER_TLS_ENABLED=false_
+_export CORE_PEER_LOCALMSPID=Org2MSP_
+_export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/red-propia/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp_
+_export CORE_PEER_ADDRESS=peer0.org2.example.com:8051_
+
+Con las variables de entorno configuradas, el peer de Org2 puede unirse al canal utilizando el bloque génesis copiado: _peer channel join -b ./channel-artifacts/mychannel.block_
 Este proceso asegura que ambos peers, peer0.org1.example.com en la MV1 y peer0.org2.example.com en la MV2, estén unidos al canal mychannel, permitiendo que ambas organizaciones participen en la red blockchain y realicen transacciones en el canal compartido.
 
- 
-Desplegar un Chaincode en Hyperledger Fabric
+# Desplegar un Chaincode en Hyperledger Fabric
+
 El siguiente paso sería desplegar un chaincode para que los peers puedan hacer smartContracts entre ellos y ejecutar transacciones. Desplegar un chaincode en Hyperledger Fabric implica varios pasos, desde empaquetar el chaincode hasta instalarlo, aprobarlo y finalmente comprometerlo en el canal. A continuación, se explica cada uno de los comandos necesarios para este proceso.
-Empaquetar el Chaincode (por ejemplo si se escribe un smartContract en go empaquetarlo con todas sus dependencias y crear un .tgz con toda la información del chaincode empaquetada)
-peer lifecycle chaincode package mycc.tar.gz --path ~/fabric-samples/red-propia/chaincode-go/ --lang golang --label mycc_1
+
+Empaquetar el Chaincode (por ejemplo si se escribe un smartContract en go empaquetarlo con todas sus dependencias y crear un .tgz con toda la información del chaincode empaquetada)-
+
+_peer lifecycle chaincode package mycc.tar.gz --path ~/fabric-samples/red-propia/chaincode-go/ --lang golang --label mycc_1_
+
 Instalar el Chaincode en los Peers. Este comando debe ejecutarse en cada peer donde se desee instalar el chaincode, tanto en peer0.org1.example.com como en peer0.org2.example.com.
-peer lifecycle chaincode install mycc.tar.gz
+
+_peer lifecycle chaincode install mycc.tar.gz_
+
 Aprobar el Chaincode por la Organización. Este comando debe ejecutarse en ambas organizaciones para que cada una apruebe el chaincode.
-peer lifecycle chaincode approveformyorg -o orderer.example.com:7050 --channelID mychannel --name mycc --version 1 --package-id mycc_1:fbf3a62d2d5e9132ef343beef5e33c1c45a4c80762389bf4f52daa770ad7f8f4 --sequence 1 
+
+_peer lifecycle chaincode approveformyorg -o orderer.example.com:7050 --channelID mychannel --name mycc --version 1 --package-id mycc_1:fbf3a62d2d5e9132ef343beef5e33c1c45a4c80762389bf4f52daa770ad7f8f4 --sequence 1_
+
 Comittear el Chaincode en el Canal
-peer lifecycle chaincode commit -o orderer.example.com:7050 --channelID mychannel --name mycc --version 1 --sequence 1 --peerAddresses peer0.org1.example.com:7051 --peerAddresses peer0.org2.example.com:8051
+
+_peer lifecycle chaincode commit -o orderer.example.com:7050 --channelID mychannel --name mycc --version 1 --sequence 1 --peerAddresses peer0.org1.example.com:7051 --peerAddresses peer0.org2.example.com:8051_
+
 Verificar el Chaincode comitteado
-peer lifecycle chaincode querycommitted --channelID mychannel --name mycc
+
+_peer lifecycle chaincode querycommitted --channelID mychannel --name mycc_
+
 Invocar el Chaincode
-peer chaincode invoke -o orderer.example.com:7050 --channelID mychannel --name mycc --peerAddresses peer0.org1.example.com:7051 --peerAddresses peer0.org2.example.com:8051 -c '{"function":"InitLedger","Args":[]}'
--c '{"function":"InitLedger","Args":[]}': Invoca la función InitLedger` del chaincode con los argumentos proporcionados.
+
+_peer chaincode invoke -o orderer.example.com:7050 --channelID mychannel --name mycc --peerAddresses peer0.org1.example.com:7051 --peerAddresses peer0.org2.example.com:8051 -c '{"function":"InitLedger","Args":[]}'-c '{"function":"InitLedger","Args":[]}'_: Invoca la función InitLedger` del chaincode con los argumentos proporcionados.
+
 Consultar el Chaincode
-peer chaincode query -C mychannel -n mycc -c '{"Args":["GetAllAssets"]}'
+
+_peer chaincode query -C mychannel -n mycc -c '{"Args":["GetAllAssets"]}'_
