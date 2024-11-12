@@ -17,7 +17,7 @@ _export FABRIC_CFG_PATH=/home/ubuntu/fabric-samples/red-propia_
 
 Para configurar y desplegar una red de Hyperledger Fabric, el archivo _configtx.yaml_ es fundamental. Este archivo define la configuración del canal, las organizaciones participantes y las políticas de consenso. Aquí se explicará la estructura y contenido del archivo _configtx.yaml_ que se utiliza para la configuración de la red.
 
-- __Organizations__: Este apartado define las organizaciones participantes en la red, incluyendo tanto los nodos orderer como los nodos peer.
+- Organizations: Este apartado define las organizaciones participantes en la red, incluyendo tanto los nodos orderer como los nodos peer.
   - OrdererOrg: Define la organización del nodo orderer. Incluye el nombre de la organización, su ID, el directorio MSP (Membership Service Provider) y las políticas de acceso (lectura, escritura, administración y validación de bloques).
   - Org1: Define la primera organización peer (Org1). Incluye el nombre, ID, directorio MSP, políticas de acceso y los anchor peers.
   - Org2: Define la segunda organización peer (Org2) con la misma estructura a la de Org1.
@@ -63,18 +63,29 @@ En la MV2: _docker-compose -f docker-compose-org2.yaml up –d_
 Esto iniciará los contenedores definidos en cada archivo docker-compose, configurando así la red de Hyperledger Fabric con un orderer y dos organizaciones en diferentes máquinas virtuales.
 Un canal es una subred de la red blockchain donde se pueden realizar transacciones específicas entre los miembros del canal. Aquí, detallaremos los pasos y comandos necesarios para que Org1 se una al canal llamado mychannel.
 
-Configuración del Entorno para Org1
+# Configuración del Entorno para Org1
+
 Antes de ejecutar los comandos para crear y unirse al canal, es necesario configurar las variables de entorno para Org1. Estas variables especifican la configuración del peer que está ejecutando los comandos.
 Deshabilita TLS (Transport Layer Security) para el peer. En un entorno de producción, generalmente se habilitaría TLS para mayor seguridad.
-export CORE_PEER_TLS_ENABLED=false  
+
+_export CORE_PEER_TLS_ENABLED=false_
+
 Especifica el MSP (Membership Service Provider) ID local del peer, que en este caso es Org1MSP.
-export CORE_PEER_LOCALMSPID=Org1MSP
+
+_export CORE_PEER_LOCALMSPID=Org1MSP_
+
 Especifica el camino al directorio MSP que contiene los certificados y las claves de la identidad administrativa de Org1.
-export CORE_PEER_MSPCONFIGPATH=/home/ubuntu/fabric-samples/red-propia/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+
+_export CORE_PEER_MSPCONFIGPATH=/home/ubuntu/fabric-samples/red-propia/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp_
+
 Define la dirección del peer peer0 de Org1.
-export CORE_PEER_ADDRESS=peer0.org1.example.com:7051
+
+_export CORE_PEER_ADDRESS=peer0.org1.example.com:7051_
+
 El siguiente comando crea un canal llamado mychannel. Este canal será administrado por el orderer especificado.
-peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/channel.tx --outputBlock ./channel-artifacts/mychannel.block
+
+_peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/channel.tx --outputBlock ./channel-artifacts/mychannel.block_
+
 •  -f ./channel-artifacts/channel.tx: Archivo de configuración del canal que especifica los parámetros y las políticas del canal.
 •  --outputBlock ./channel-artifacts/mychannel.block: Archivo de salida donde se guarda el bloque génesis del canal.
 Una vez que el canal ha sido creado, el peer de Org1 se une al canal utilizando el bloque génesis del canal (mychannel.block).
