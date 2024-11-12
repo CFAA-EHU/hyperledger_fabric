@@ -64,7 +64,7 @@ Esto iniciará los contenedores definidos en cada archivo docker-compose, config
 
 Un canal es una subred de la red blockchain donde se pueden realizar transacciones específicas entre los miembros del canal. Aquí, detallaremos los pasos y comandos necesarios para que Org1 se una al canal llamado mychannel.
 
-# Configuración del Entorno para Org1
+## Configuración del Entorno para Org1
 
 Antes de ejecutar los comandos para crear y unirse al canal, es necesario configurar las variables de entorno para Org1. Estas variables especifican la configuración del peer que está ejecutando los comandos.
 Deshabilita TLS (Transport Layer Security) para el peer. En un entorno de producción, generalmente se habilitaría TLS para mayor seguridad.
@@ -96,7 +96,7 @@ _peer channel join -b ./channel-artifacts/mychannel.block_
 
 Para verificar que el peer se ha unido correctamente al canal, se puede listar los canales a los que el peer está unido: _peer channel list_.
 
-# Configuración del Entorno para Org2
+## Configuración del Entorno para Org2
 
 Para que el peer de Org2 (que reside en la MV2) pueda unirse al canal mychannel, es necesario copiar el bloque de creación del canal (mychannel.block) desde la MV1 a la MV2. Una vez copiado, se pueden configurar las variables de entorno para Org2 y ejecutar los comandos necesarios para unirse al canal.
 
@@ -109,7 +109,7 @@ Con las variables de entorno configuradas, el peer de Org2 puede unirse al canal
 
 Este proceso asegura que ambos peers, peer0.org1.example.com en la MV1 y peer0.org2.example.com en la MV2, estén unidos al canal mychannel, permitiendo que ambas organizaciones participen en la red blockchain y realicen transacciones en el canal compartido.
 
-# Desplegar un Chaincode en Hyperledger Fabric
+## Desplegar un Chaincode en Hyperledger Fabric
 
 El siguiente paso sería desplegar un chaincode para que los peers puedan hacer smartContracts entre ellos y ejecutar transacciones. Desplegar un chaincode en Hyperledger Fabric implica varios pasos, desde empaquetar el chaincode hasta instalarlo, aprobarlo y finalmente comprometerlo en el canal. A continuación, se explica cada uno de los comandos necesarios para este proceso.
 
