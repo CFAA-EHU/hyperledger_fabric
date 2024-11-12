@@ -77,7 +77,7 @@ _export CORE_PEER_LOCALMSPID=Org1MSP_
 
 Especifica el camino al directorio MSP que contiene los certificados y las claves de la identidad administrativa de Org1.
 
-_export CORE_PEER_MSPCONFIGPATH=/home/ubuntu/fabric-samples/org1.example.com/users/Admin@org1.example.com/msp_
+_export CORE_PEER_MSPCONFIGPATH=/home/ubuntu/fabric-samples/org1.example.com/users/Admin.org1.example/msp_
 
 Define la dirección del peer peer0 de Org1.
 
@@ -102,7 +102,7 @@ Para que el peer de Org2 (que reside en la MV2) pueda unirse al canal mychannel,
 
 _export CORE_PEER_TLS_ENABLED=false_.  
 _export CORE_PEER_LOCALMSPID=Org2MSP_.  
-_export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/org2.example.com/users/Admin@org2.example.com/msp_.  
+_export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/org2.example.com/users/Admin.org2.example/msp_.  
 _export CORE_PEER_ADDRESS=peer0.org2.example.com:8051_.  
 
 Con las variables de entorno configuradas, el peer de Org2 puede unirse al canal utilizando el bloque génesis copiado: _peer channel join -b ./channel-artifacts/mychannel.block_.
