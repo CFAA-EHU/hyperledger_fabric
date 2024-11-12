@@ -16,17 +16,19 @@ La variable de entorno FABRIC_CFG_PATH se utiliza para especificar la ruta donde
 _export FABRIC_CFG_PATH=/home/ubuntu/fabric-samples/red-propia_
 
 Para configurar y desplegar una red de Hyperledger Fabric, el archivo configtx.yaml es fundamental. Este archivo define la configuración del canal, las organizaciones participantes y las políticas de consenso. Aquí se explicará la estructura y contenido del archivo configtx.yaml que se utiliza para la configuración de la red.
-•	Organizations: Este apartado define las organizaciones participantes en la red, incluyendo tanto los nodos orderer como los nodos peer.
-o	OrdererOrg: Define la organización del nodo orderer. Incluye el nombre de la organización, su ID, el directorio MSP (Membership Service Provider) y las políticas de acceso (lectura, escritura, administración y validación de bloques).
-o	Org1: Define la primera organización peer (Org1). Incluye el nombre, ID, directorio MSP, políticas de acceso y los anchor peers.
-o	Org2: Define la segunda organización peer (Org2) con la misma estructura a la de Org1.
-•	Capabilitites: Este apartado define las capacidades del canal, el orden y la aplicación. En este caso, se utilizan las capacidades de la versión 2.0 de Hyperledger Fabric.
-•	Application: Define las configuraciones por defecto para las aplicaciones, incluyendo políticas de acceso y capacidades.
-•	Orderer: Define las configuraciones por defecto del nodo orderer, incluyendo el tipo de orden, direcciones, tamaño de los lotes y políticas de acceso.
-•	Channel: Define las configuraciones por defecto para los canales, incluyendo las políticas de acceso y capacidades.
-•	Profiles: Define los perfiles de configuración para la red, incluyendo el genesis block y la configuración del canal.
-o	TwoOrgsOrdererGenesis: Define el perfil para el genesis block, incluyendo las organizaciones orderer y sus capacidades.
-o	TwoOrgsChannel: Define el perfil para la configuración del canal, incluyendo las organizaciones participantes y sus capacidades.
+
+- Organizations: Este apartado define las organizaciones participantes en la red, incluyendo tanto los nodos orderer como los nodos peer.
+  - OrdererOrg: Define la organización del nodo orderer. Incluye el nombre de la organización, su ID, el directorio MSP (Membership Service Provider) y las políticas de acceso (lectura, escritura, administración y validación de bloques).
+  - Org1: Define la primera organización peer (Org1). Incluye el nombre, ID, directorio MSP, políticas de acceso y los anchor peers.
+  - Org2: Define la segunda organización peer (Org2) con la misma estructura a la de Org1.
+- Capabilitites: Este apartado define las capacidades del canal, el orden y la aplicación. En este caso, se utilizan las capacidades de la versión 2.0 de Hyperledger Fabric.
+- Application: Define las configuraciones por defecto para las aplicaciones, incluyendo políticas de acceso y capacidades.
+- Orderer: Define las configuraciones por defecto del nodo orderer, incluyendo el tipo de orden, direcciones, tamaño de los lotes y políticas de acceso.
+- Channel: Define las configuraciones por defecto para los canales, incluyendo las políticas de acceso y capacidades.
+- Profiles: Define los perfiles de configuración para la red, incluyendo el genesis block y la configuración del canal.
+  - TwoOrgsOrdererGenesis: Define el perfil para el genesis block, incluyendo las organizaciones orderer y sus capacidades.
+  - TwoOrgsChannel: Define el perfil para la configuración del canal, incluyendo las organizaciones participantes y sus capacidades.
+
 El siguiente paso que hay que hacer es crear el canal. Con el siguientes comando, se va a configurar y generar el archivo genesis block:
 configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block -channelID system-channel
 Y la transacción del canal, lo que permite proceder con la creación y gestión de la red blockchain en Hyperledger Fabric.
