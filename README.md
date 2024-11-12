@@ -57,7 +57,7 @@ El siguiente paso es definir y configurar los archivos _docker-compose.yaml_. Es
 
 En cada máquina virtual, se ejecutan los siguientes comandos para levantar los contenedores:
 
-En la MV1: _docker-compose -f docker-compose-org1.yaml up -d_.
+En la MV1: _docker-compose -f docker-compose-org1.yaml up -d_.  
 En la MV2: _docker-compose -f docker-compose-org2.yaml up –d_.
 
 Esto iniciará los contenedores definidos en cada archivo docker-compose, configurando así la red de Hyperledger Fabric con un orderer y dos organizaciones en diferentes máquinas virtuales.
