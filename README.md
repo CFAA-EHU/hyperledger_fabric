@@ -125,18 +125,18 @@ Aprobar el Chaincode por la Organización. Este comando debe ejecutarse en ambas
 
 _peer lifecycle chaincode approveformyorg -o orderer.example.com:7050 --channelID mychannel --name mycc --version 1 --package-id mycc_1:fbf3a62d2d5e9132ef343beef5e33c1c45a4c80762389bf4f52daa770ad7f8f4 --sequence 1_
 
-Comittear el Chaincode en el Canal
+Comittear el Chaincode en el Canal.
 
 _peer lifecycle chaincode commit -o orderer.example.com:7050 --channelID mychannel --name mycc --version 1 --sequence 1 --peerAddresses peer0.org1.example.com:7051 --peerAddresses peer0.org2.example.com:8051_
 
-Verificar el Chaincode comitteado
+Verificar el Chaincode comitteado.
 
 _peer lifecycle chaincode querycommitted --channelID mychannel --name mycc_
 
-Invocar el Chaincode
+Invoca la función InitLedger` del chaincode con los argumentos proporcionados.
 
-_peer chaincode invoke -o orderer.example.com:7050 --channelID mychannel --name mycc --peerAddresses peer0.org1.example.com:7051 --peerAddresses peer0.org2.example.com:8051 -c '{"function":"InitLedger","Args":[]}'-c '{"function":"InitLedger","Args":[]}'_: Invoca la función InitLedger` del chaincode con los argumentos proporcionados.
+_peer chaincode invoke -o orderer.example.com:7050 --channelID mychannel --name mycc --peerAddresses peer0.org1.example.com:7051 --peerAddresses peer0.org2.example.com:8051 -c '{"function":"InitLedger","Args":[]}'_
 
-Consultar el Chaincode
+Consultar el Chaincode.
 
 _peer chaincode query -C mychannel -n mycc -c '{"Args":["GetAllAssets"]}'_
