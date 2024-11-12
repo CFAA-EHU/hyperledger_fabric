@@ -100,10 +100,10 @@ Para verificar que el peer se ha unido correctamente al canal, se puede listar l
 
 Para que el peer de Org2 (que reside en la MV2) pueda unirse al canal mychannel, es necesario copiar el bloque de creación del canal (mychannel.block) desde la MV1 a la MV2. Una vez copiado, se pueden configurar las variables de entorno para Org2 y ejecutar los comandos necesarios para unirse al canal.
 
-_export CORE_PEER_TLS_ENABLED=false_.  
-_export CORE_PEER_LOCALMSPID=Org2MSP_.  
-_export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/org2.example.com/users/Admin.org2.example/msp_.  
-_export CORE_PEER_ADDRESS=peer0.org2.example.com:8051_.  
+_export CORE_PEER_TLS_ENABLED=false_  
+_export CORE_PEER_LOCALMSPID=Org2MSP_  
+_export CORE_PEER_MSPCONFIGPATH=/home/usuario/fabric-samples/org2.example.com/users/Admin.org2.example/msp_  
+_export CORE_PEER_ADDRESS=peer0.org2.example.com:8051_  
 
 Con las variables de entorno configuradas, el peer de Org2 puede unirse al canal utilizando el bloque génesis copiado: _peer channel join -b ./channel-artifacts/mychannel.block_.
 
