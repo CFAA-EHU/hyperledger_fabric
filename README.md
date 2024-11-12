@@ -48,11 +48,11 @@ De esta manera vamos a tener los siguientes elementos en la red:
 - Org1MSPanchors.tx y Org2MSPanchors.tx: Son archivos de transacción que actualizan los peers de anclaje de las organizaciones Org1 y Org2 respectivamente.
 
 El siguiente paso es definir y configurar los archivos _docker-compose.yaml_. Estos archivos describen cómo se deben levantar los contenedores Docker para los nodos de la red. En este ejemplo, utilizamos dos archivos _docker-compose_ para dos máquinas virtuales (MV):
-- docker-compose-org1.yaml en la MV1, que levanta el contenedor para el orderer y el peer de la organización Org1. Se define la versión, los volumes persistentes para los contenedores orderer y peer de Org1, la red en la que se comunican los contenedores y los servicios a desplegar:
+- _docker-compose-org1.yaml_ en la MV1, que levanta el contenedor para el orderer y el peer de la organización Org1. Se define la versión, los volumes persistentes para los contenedores orderer y peer de Org1, la red en la que se comunican los contenedores y los servicios a desplegar:
   - __orderer.example.com__: nombre del contenedor, imagen de Docker a utilizar (hyperledger/fabric-orderer:latest), environment (Variables de entorno necesarias para la configuración del orderer), volumes (Montaje de volúmenes para compartir archivos necesarios, como el bloque génesis y la MSP) y networks (Red en la que se comunica el contenedor).
   - __peer0.org1.example.com__: Similar configuración para el peer de Org1, especificando la imagen de Docker, variables de entorno, volúmenes y red.
 
-- docker-compose-org2.yaml en la MV2, que levanta el contenedor para el peer de la organización Org2. Se define la versión, los volumes persistentes para el contenedor peer de Org2, la red y el servicio a desplegar:
+- _docker-compose-org2.yaml_ en la MV2, que levanta el contenedor para el peer de la organización Org2. Se define la versión, los volumes persistentes para el contenedor peer de Org2, la red y el servicio a desplegar:
   - __peer0.org2.example.com__: Similar configuración al peer de Org1, pero con puertos y MSP específicos para Org2.
 
 En cada máquina virtual, se ejecutan los siguientes comandos para levantar los contenedores:
