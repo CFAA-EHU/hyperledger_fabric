@@ -39,7 +39,7 @@ _configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/
 
 Para continuar con la configuración y despliegue de una red de Hyperledger Fabric, es necesario definir y actualizar los anchor peers para cada organización. Los peers de anclaje son nodos peer dentro de una organización que actúan como puntos de comunicación principales para el canal.
 
-_configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID mychannel -asOrg Org1MSP_
+_configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID mychannel -asOrg Org1MSP_  
 _configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID mychannel -asOrg Org2MSP_
 
 De esta manera vamos a tener los siguientes elementos en la red:
