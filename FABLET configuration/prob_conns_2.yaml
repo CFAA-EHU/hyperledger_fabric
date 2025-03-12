@@ -1,0 +1,31 @@
+name: "simplest_with_discover"
+version: 1.0.0
+
+organizations:
+    Org1:
+        mspid: Org1MSP
+        cryptoPath: /home/ubuntu/fabric-samples/red-propia/crypto-config/peerOrganizations/org1.example.com/msp
+        peers:
+            - peer0.org1.example.com
+
+
+orderers:
+    orderer.example.com:
+        url: grpc://orderer.example.com:7050
+
+peers:
+    peer0.org1.example.com:
+        url: grpc://peer0.org1.example.com:7051
+        eventUrl: grpc://peer0.org1.example.com:7053
+        
+
+channels:
+    mychannel:
+        orderers:
+            - orderer.example.com
+        peers:
+            peer0.org1.example.com:
+                endorsingPeer: true
+                chaincodeQuery: true
+                ledgerQuery: true
+                eventSource: true
